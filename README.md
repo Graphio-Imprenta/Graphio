@@ -38,7 +38,7 @@ La web tiene como objetivos principales:
 ## 📁 Estructura del proyecto
 
 ```
-graphio-web/
+Graphio
 │
 ├── index.html              # Página principal (Home)
 ├── README.md               # Este archivo
