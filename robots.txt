@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /pages/legal/
+
+Sitemap: https://Graphio-Imprenta.github.io/Graphio/sitemap.xml
