@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Fondo negro -->
+  <rect width="32" height="32" rx="6" fill="#1A1A2E"/>
+  <!-- Letra G estilizada en blanco -->
+  <text
+    x="16"
+    y="23"
+    font-family="Georgia, serif"
+    font-size="22"
+    font-weight="700"
+    fill="#FFFFFF"
+    text-anchor="middle"
+    dominant-baseline="auto"
+    letter-spacing="-1"
+  >G</text>
+  <!-- Trazo horizontal del isotipo (detalle gráfico) -->
+  <rect x="17" y="17" width="7" height="2.5" rx="1" fill="#FFFFFF"/>
+</svg>

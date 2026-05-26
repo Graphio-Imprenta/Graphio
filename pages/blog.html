@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Blog — Consejos de Impresión y Diseño · Graphio</title>
+  <meta name="description" content="Artículos prácticos sobre impresión, diseño gráfico y marketing visual. Aprende a preparar archivos, elegir materiales y sacar el máximo partido a tu impresión."/>
+  <link rel="canonical" href="https://Graphio-Imprenta.github.io/Graphio/pages/blog.html"/>
+  <link rel="icon" href="../favicon.ico"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <style>
+    .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+    .blog-card{border-radius:18px;overflow:hidden;border:1px solid var(--borde);transition:var(--trans);background:var(--blanco)}
+    .blog-card:hover{box-shadow:var(--sombra);transform:translateY(-5px)}
+    .blog-card:hover .blog-thumb{font-size:3.5rem}
+    .blog-thumb{height:170px;display:flex;align-items:center;justify-content:center;font-size:3rem;transition:var(--trans)}
+    .blog-body{padding:22px}
+    .blog-meta{display:flex;gap:10px;margin-bottom:9px;align-items:center}
+    .blog-cat{font-size:.72rem;font-weight:600;color:var(--azul);text-transform:uppercase;letter-spacing:.06em}
+    .blog-fecha{font-size:.72rem;color:var(--gris)}
+    .blog-card h3{font-size:1.05rem;margin-bottom:8px;line-height:1.4;color:var(--oscuro)}
+    .blog-card p{font-size:.87rem;margin-bottom:14px;line-height:1.65}
+    .blog-leer{font-size:.85rem;font-weight:600;color:var(--azul);display:inline-flex;align-items:center;gap:5px;transition:gap var(--trans)}
+    .blog-leer:hover{gap:10px}
+    .newsletter-wrap{background:var(--blanco);border-radius:20px;padding:52px;text-align:center;border:1px solid var(--borde);max-width:600px;margin:0 auto}
+    .newsletter-wrap h2{margin-bottom:10px}
+    .newsletter-wrap p{margin-bottom:28px}
+    .newsletter-form{display:flex;gap:10px;max-width:440px;margin:0 auto}
+    .newsletter-form input{flex:1;padding:13px 16px;border:1.5px solid var(--borde);border-radius:var(--radio);font-family:var(--font-b);font-size:.92rem;outline:none;transition:var(--trans);color:var(--oscuro)}
+    .newsletter-form input:focus{border-color:var(--azul);box-shadow:0 0 0 3px rgba(58,134,255,.12)}
+    @media(max-width:960px){.blog-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:620px){.blog-grid{grid-template-columns:1fr}.newsletter-form{flex-direction:column}.newsletter-wrap{padding:32px 24px}}
+  </style>
+</head>
+<body>
+
+<a href="https://wa.me/34600000000" class="wa-btn" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+
+<header class="header">
+  <nav class="nav container" aria-label="Navegación principal">
+    <a href="../index.html" class="logo">Graph<span>io</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="contacto.html" class="btn btn-primary" style="padding:10px 22px;font-size:.86rem;">Presupuesto gratis</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menú" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Migas de pan"><a href="../index.html">Inicio</a><span>/</span><span>Blog</span></nav>
+      <div class="badge">Recursos y consejos</div>
+      <h1>Blog de diseño e impresión</h1>
+      <p>Artículos prácticos para que tu material impreso comunique mejor, dure más y llegue a quien tiene que llegar.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="blog-titulo">
+    <div class="container">
+      <div class="blog-grid">
+
+        <article class="blog-card fade-up">
+          <div class="blog-thumb" style="background:#eef4ff" aria-hidden="true">🖨️</div>
+          <div class="blog-body">
+            <div class="blog-meta"><span class="blog-cat">Impresión</span><span class="blog-fecha">12 mayo 2025</span></div>
+            <h3>CMYK vs RGB: por qué el color de pantalla no es el mismo que en papel</h3>
+            <p>Si alguna vez te ha sorprendido que el color impreso no era igual al que veías en pantalla, este artículo te explica por qué y cómo evitarlo.</p>
+            <span class="blog-leer">Leer artículo →</span>
+          </div>
+        </article>
+
+        <article class="blog-card fade-up">
+          <div class="blog-thumb" style="background:#eef4ff" aria-hidden="true">📐</div>
+          <div class="blog-body">
+            <div class="blog-meta"><span class="blog-cat">Diseño</span><span class="blog-fecha">28 abril 2025</span></div>
+            <h3>Cómo preparar un archivo para imprenta sin cometer errores</h3>
+            <p>Sangría, marcas de corte, resolución mínima y perfil de color. Todo lo que necesitas saber antes de enviar tu archivo a producción.</p>
+            <span class="blog-leer">Leer artículo →</span>
+          </div>
+        </article>
+
+        <article class="blog-card fade-up">
+          <div class="blog-thumb" style="background:#fff3ee" aria-hidden="true">📦</div>
+          <div class="blog-body">
+            <div class="blog-meta"><span class="blog-cat">Packaging</span><span class="blog-fecha">15 abril 2025</span></div>
+            <h3>El packaging como herramienta de marketing: por qué importa más de lo que crees</h3>
+            <p>El 70% de las decisiones de compra se toman en el punto de venta. Cómo usar el packaging para diferenciarte.</p>
+            <span class="blog-leer">Leer artículo →</span>
+          </div>
+        </article>
+
+        <article class="blog-card fade-up">
+          <div class="blog-thumb" style="background:#f0fff4" aria-hidden="true">🎨</div>
+          <div class="blog-body">
+            <div class="blog-meta"><span class="blog-cat">Diseño</span><span class="blog-fecha">2 abril 2025</span></div>
+            <h3>Los 5 errores más comunes al diseñar una tarjeta de visita</h3>
+            <p>Texto demasiado pequeño, márgenes incorrectos, imágenes en baja resolución… Los fallos más frecuentes que vemos cada semana.</p>
+            <span class="blog-leer">Leer artículo →</span>
+          </div>
+        </article>
+
+        <article class="blog-card fade-up">
+          <div class="blog-thumb" style="background:#fff8e8" aria-hidden="true">🏷️</div>
+          <div class="blog-body">
+            <div class="blog-meta"><span class="blog-cat">Regalo promo</span><span class="blog-fecha">18 marzo 2025</span></div>
+            <h3>Merchandising corporativo: qué regalar a tus clientes para que te recuerden</h3>
+            <p>Los artículos promocionales con mejor relación impacto-precio para cada sector y tipo de empresa.</p>
+            <span class="blog-leer">Leer artículo →</span>
+          </div>
+        </article>
+
+        <article class="blog-card fade-up">
+          <div class="blog-thumb" style="background:#eef4ff" aria-hidden="true">📊</div>
+          <div class="blog-body">
+            <div class="blog-meta"><span class="blog-cat">Marketing</span><span class="blog-fecha">5 marzo 2025</span></div>
+            <h3>Marketing impreso en 2025: ¿sigue siendo efectivo frente al digital?</h3>
+            <p>Con tanto ruido digital, el material impreso ha recuperado un valor diferencial enorme. Datos y casos reales que lo demuestran.</p>
+            <span class="blog-leer">Leer artículo →</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="newsletter-wrap fade-up">
+        <div class="badge">Newsletter</div>
+        <h2>Consejos de impresión en tu bandeja</h2>
+        <p>Cada dos semanas, un artículo práctico sobre diseño, impresión y marketing visual. Sin spam, solo valor.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault();this.innerHTML='<p style=\'color:var(--azul);font-weight:600;font-size:.95rem;\'>✓ ¡Suscrito! Te escribimos pronto.</p>'">
+          <input type="email" placeholder="tu@email.com" required aria-label="Tu email"/>
+          <button type="submit" class="btn btn-primary">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" aria-label="Pie de página">
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-logo">Graph<span>io</span></div><p class="footer-desc">Servicios gráficos e imprenta profesional. Calidad, rapidez y atención personalizada.</p></div>
+      <nav class="footer-col" aria-label="Servicios"><h4>Servicios</h4><ul><li><a href="servicios.html">Material corporativo</a></li><li><a href="servicios.html">Gran formato</a></li><li><a href="servicios.html">Packaging</a></li><li><a href="servicios.html">Regalo promo</a></li></ul></nav>
+      <nav class="footer-col" aria-label="Empresa"><h4>Empresa</h4><ul><li><a href="nosotros.html">Sobre nosotros</a></li><li><a href="blog.html">Blog</a></li><li><a href="contacto.html">Contacto</a></li></ul></nav>
+      <nav class="footer-col" aria-label="Legal"><h4>Legal</h4><ul><li><a href="legal/aviso-legal.html">Aviso legal</a></li><li><a href="legal/privacidad.html">Privacidad</a></li><li><a href="legal/cookies.html">Cookies</a></li></ul></nav>
+    </div>
+    <div class="footer-bottom"><p>© 2025 Graphio. Todos los derechos reservados.</p><nav class="footer-legal" aria-label="Legal"><a href="legal/aviso-legal.html">Aviso legal</a><a href="legal/privacidad.html">Privacidad</a><a href="legal/cookies.html">Cookies</a></nav></div>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>
