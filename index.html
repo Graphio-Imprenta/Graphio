@@ -10,338 +10,12 @@
   <meta property="og:description" content="Imprenta online y servicios gráficos profesionales. Presupuesto gratis en 24h." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://Graphio-Imprenta.github.io/Graphio/" />
+  <link rel="stylesheet" href="css/main.css">
   <link rel="canonical" href="https://Graphio-Imprenta.github.io/Graphio/" />
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="Graphio/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <style>
-    /* ══════════════════════════════════════
-       VARIABLES & RESET
-    ══════════════════════════════════════ */
-    :root {
-      --azul:       #3A86FF;
-      --azul-dark:  #2563eb;
-      --naranja:    #FF6B35;
-      --oscuro:     #1A1A2E;
-      --claro:      #F8F9FA;
-      --gris:       #6C757D;
-      --blanco:     #ffffff;
-      --borde:      #E2E8F0;
-      --sombra:     0 4px 32px rgba(26,26,46,0.09);
-      --sombra-md:  0 8px 40px rgba(26,26,46,0.13);
-      --radio:      12px;
-      --trans:      0.25s ease;
-      --font-d:     'Playfair Display', Georgia, serif;
-      --font-b:     'DM Sans', system-ui, sans-serif;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body { font-family: var(--font-b); color: var(--oscuro); background: var(--blanco); line-height: 1.6; overflow-x: hidden; }
-    img { max-width: 100%; display: block; }
-    a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
-    button { cursor: pointer; }
-
-    /* ══════════════════════════════════════
-       TIPOGRAFÍA
-    ══════════════════════════════════════ */
-    h1 { font-family: var(--font-d); font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 900; line-height: 1.12; }
-    h2 { font-family: var(--font-d); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1.18; }
-    h3 { font-family: var(--font-d); font-size: 1.2rem; font-weight: 700; line-height: 1.3; }
-    p  { color: var(--gris); line-height: 1.78; }
-
-    /* ══════════════════════════════════════
-       LAYOUT
-    ══════════════════════════════════════ */
-    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
-    .section    { padding: 96px 0; }
-    .section-alt  { background: var(--claro); }
-    .section-dark { background: var(--oscuro); }
-    .section-dark p { color: rgba(255,255,255,0.55); }
-    .section-header { text-align: center; max-width: 620px; margin: 0 auto 60px; }
-    .section-header h2 { margin-bottom: 14px; }
-
-    /* ══════════════════════════════════════
-       BOTONES
-    ══════════════════════════════════════ */
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 30px; border-radius: var(--radio);
-      font-family: var(--font-b); font-size: 0.93rem; font-weight: 600;
-      border: none; transition: var(--trans); letter-spacing: 0.01em;
-      cursor: pointer; white-space: nowrap;
-    }
-    .btn-primary { background: var(--azul); color: var(--blanco); }
-    .btn-primary:hover { background: var(--azul-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(58,134,255,0.38); }
-    .btn-secondary { background: transparent; color: var(--azul); border: 2px solid var(--azul); }
-    .btn-secondary:hover { background: var(--azul); color: var(--blanco); transform: translateY(-2px); }
-    .btn-naranja { background: var(--naranja); color: var(--blanco); }
-    .btn-naranja:hover { background: #e55a20; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,53,0.38); }
-    .btn-blanco { background: var(--blanco); color: var(--oscuro); }
-    .btn-blanco:hover { background: var(--claro); transform: translateY(-2px); }
-
-    /* ══════════════════════════════════════
-       BADGE
-    ══════════════════════════════════════ */
-    .badge {
-      display: inline-block; padding: 5px 16px; border-radius: 50px;
-      font-size: 0.74rem; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; background: rgba(58,134,255,0.1);
-      color: var(--azul); margin-bottom: 16px;
-    }
-
-    /* ══════════════════════════════════════
-       HEADER & NAV
-    ══════════════════════════════════════ */
-    .header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.96); backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--borde);
-    }
-    .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-    .logo { font-family: var(--font-d); font-size: 1.65rem; font-weight: 900; color: var(--oscuro); letter-spacing: -0.02em; }
-    .logo span { color: var(--azul); }
-    .nav-links { display: flex; align-items: center; gap: 28px; }
-    .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--gris); transition: var(--trans); }
-    .nav-links a:hover, .nav-links a.active { color: var(--azul); }
-    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 4px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--oscuro); border-radius: 2px; transition: var(--trans); }
-
-    /* ══════════════════════════════════════
-       HERO
-    ══════════════════════════════════════ */
-    .hero {
-      padding: 96px 0 80px;
-      background: linear-gradient(135deg, #eef4ff 0%, #ffffff 55%, #fff3ee 100%);
-      position: relative; overflow: hidden;
-    }
-    .hero::after {
-      content: ''; position: absolute;
-      width: 600px; height: 600px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(58,134,255,0.06) 0%, transparent 70%);
-      top: -160px; right: -100px; pointer-events: none;
-    }
-    .hero-inner { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center; position: relative; z-index: 1; }
-    .hero-tag { }
-    .hero-title { margin-bottom: 18px; }
-    .hero-title em { font-style: italic; color: var(--azul); }
-    .hero-desc { font-size: 1.08rem; margin-bottom: 36px; max-width: 500px; color: var(--gris); }
-    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
-    .hero-stats { display: flex; gap: 36px; flex-wrap: wrap; }
-    .stat { }
-    .stat-num { font-family: var(--font-d); font-size: 2.1rem; font-weight: 900; color: var(--oscuro); line-height: 1; }
-    .stat-txt { font-size: 0.8rem; color: var(--gris); font-weight: 500; margin-top: 3px; }
-
-    /* Hero visual — dark card cluster */
-    .hero-visual {
-      background: var(--oscuro); border-radius: 20px; padding: 28px;
-      display: flex; flex-direction: column; gap: 12px;
-      box-shadow: var(--sombra-md);
-      position: relative; overflow: hidden;
-    }
-    .hero-visual::before {
-      content: ''; position: absolute; top: -40px; right: -40px;
-      width: 160px; height: 160px; border-radius: 50%;
-      background: rgba(58,134,255,0.07);
-    }
-    .hv-card {
-      background: rgba(255,255,255,0.06); border-radius: 12px;
-      padding: 16px 18px; display: flex; align-items: center; gap: 14px;
-      border: 1px solid rgba(255,255,255,0.07);
-      transition: var(--trans);
-    }
-    .hv-card:hover { background: rgba(255,255,255,0.10); }
-    .hv-icon { font-size: 1.8rem; flex-shrink: 0; }
-    .hv-title { color: var(--blanco); font-weight: 600; font-size: 0.9rem; }
-    .hv-sub   { color: rgba(255,255,255,0.42); font-size: 0.75rem; margin-top: 2px; }
-
-    /* ══════════════════════════════════════
-       SERVICIOS
-    ══════════════════════════════════════ */
-    .servicios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .srv-card {
-      background: var(--blanco); border-radius: 18px; padding: 36px 28px;
-      border: 1px solid var(--borde); transition: var(--trans);
-      position: relative; overflow: hidden;
-    }
-    .srv-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: var(--azul); transform: scaleX(0); transform-origin: left;
-      transition: transform var(--trans);
-    }
-    .srv-card:hover { box-shadow: var(--sombra); transform: translateY(-5px); border-color: rgba(58,134,255,0.25); }
-    .srv-card:hover::before { transform: scaleX(1); }
-    .srv-icon { font-size: 2.4rem; margin-bottom: 20px; }
-    .srv-card h3 { margin-bottom: 10px; font-size: 1.1rem; color: var(--oscuro); }
-    .srv-card p  { font-size: 0.88rem; line-height: 1.7; }
-    .servicios-cta { text-align: center; margin-top: 44px; }
-
-    /* ══════════════════════════════════════
-       PROCESO
-    ══════════════════════════════════════ */
-    .proceso-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
-    .paso {
-      text-align: center; padding: 36px 20px 32px;
-      background: rgba(255,255,255,0.05); border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.07); transition: var(--trans);
-    }
-    .paso:hover { background: rgba(255,255,255,0.08); }
-    .paso-num {
-      width: 50px; height: 50px; border-radius: 50%; background: var(--azul);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-d); font-size: 1.3rem; font-weight: 700;
-      color: var(--blanco); margin: 0 auto 20px;
-    }
-    .paso h3 { color: var(--blanco); font-size: 0.95rem; margin-bottom: 8px; }
-    .paso p   { font-size: 0.83rem; }
-
-    /* ══════════════════════════════════════
-       TESTIMONIOS
-    ══════════════════════════════════════ */
-    .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-    .testi {
-      background: var(--blanco); border-radius: 18px; padding: 32px;
-      border: 1px solid var(--borde); box-shadow: var(--sombra);
-      transition: var(--trans);
-    }
-    .testi:hover { transform: translateY(-3px); box-shadow: var(--sombra-md); }
-    .estrellas { color: #F59E0B; font-size: 0.9rem; margin-bottom: 14px; letter-spacing: 2px; }
-    .testi-txt { font-size: 0.93rem; color: var(--oscuro); line-height: 1.75; margin-bottom: 22px; font-style: italic; }
-    .testi-autor { display: flex; align-items: center; gap: 12px; }
-    .autor-av {
-      width: 42px; height: 42px; border-radius: 50%; background: var(--azul);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--blanco); font-weight: 700; font-size: 1rem;
-      flex-shrink: 0;
-    }
-    .autor-nombre  { font-weight: 600; font-size: 0.88rem; color: var(--oscuro); }
-    .autor-empresa { font-size: 0.78rem; color: var(--gris); margin-top: 1px; }
-
-    /* ══════════════════════════════════════
-       FAQ
-    ══════════════════════════════════════ */
-    .faq-wrap { max-width: 740px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
-    .faq-item { border: 1.5px solid var(--borde); border-radius: var(--radio); overflow: hidden; }
-    .faq-q {
-      padding: 18px 22px; display: flex; justify-content: space-between; align-items: center;
-      cursor: pointer; font-weight: 600; font-size: 0.93rem; color: var(--oscuro);
-      background: var(--blanco); transition: background var(--trans);
-      user-select: none;
-    }
-    .faq-q:hover { background: var(--claro); }
-    .faq-icon { font-size: 1.3rem; color: var(--gris); transition: transform 0.3s ease, color 0.2s; flex-shrink: 0; }
-    .faq-a {
-      max-height: 0; overflow: hidden;
-      transition: max-height 0.32s ease, padding 0.32s ease;
-      background: var(--claro);
-    }
-    .faq-a p { padding: 0 22px; font-size: 0.9rem; }
-    .faq-item.open .faq-a    { max-height: 180px; }
-    .faq-item.open .faq-a p  { padding: 18px 22px; }
-    .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--azul); }
-    .faq-item.open .faq-q    { color: var(--azul); background: var(--claro); }
-
-    /* ══════════════════════════════════════
-       CTA BANNER
-    ══════════════════════════════════════ */
-    .cta-banner {
-      background: linear-gradient(135deg, var(--azul) 0%, #1a4ed8 100%);
-      border-radius: 24px; padding: 60px 56px;
-      display: flex; align-items: center; justify-content: space-between; gap: 32px;
-      position: relative; overflow: hidden;
-    }
-    .cta-banner::after {
-      content: ''; position: absolute; top: -60px; right: -60px;
-      width: 240px; height: 240px; border-radius: 50%;
-      background: rgba(255,255,255,0.05);
-    }
-    .cta-banner h2  { color: var(--blanco); margin-bottom: 8px; font-size: clamp(1.6rem, 3vw, 2.2rem); }
-    .cta-banner > div > p  { color: rgba(255,255,255,0.78); }
-    .cta-btns { display: flex; gap: 12px; flex-shrink: 0; flex-wrap: wrap; position: relative; z-index: 1; }
-
-    /* ══════════════════════════════════════
-       WHATSAPP FLOTANTE
-    ══════════════════════════════════════ */
-    .wa-btn {
-      position: fixed; bottom: 28px; right: 28px; z-index: 999;
-      width: 58px; height: 58px; border-radius: 50%;
-      background: #25D366;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: 0 4px 20px rgba(37,211,102,0.5);
-      transition: var(--trans); border: none;
-    }
-    .wa-btn:hover { transform: scale(1.12); box-shadow: 0 6px 28px rgba(37,211,102,0.65); }
-
-    /* ══════════════════════════════════════
-       FOOTER
-    ══════════════════════════════════════ */
-    .footer { background: var(--oscuro); color: rgba(255,255,255,0.62); padding: 72px 0 32px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 52px; }
-    .footer-logo { font-family: var(--font-d); font-size: 1.55rem; font-weight: 900; color: var(--blanco); margin-bottom: 12px; }
-    .footer-logo span { color: var(--azul); }
-    .footer-desc { font-size: 0.86rem; line-height: 1.75; max-width: 280px; }
-    .footer-col h4 {
-      color: var(--blanco); font-weight: 600; font-size: 0.78rem;
-      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 18px;
-    }
-    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
-    .footer-col ul a { font-size: 0.86rem; transition: color var(--trans); }
-    .footer-col ul a:hover { color: var(--blanco); }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-    }
-    .footer-bottom p { font-size: 0.8rem; }
-    .footer-legal { display: flex; gap: 20px; }
-    .footer-legal a { font-size: 0.8rem; transition: color var(--trans); }
-    .footer-legal a:hover { color: var(--blanco); }
-
-    /* ══════════════════════════════════════
-       ANIMACIONES DE ENTRADA
-    ══════════════════════════════════════ */
-    .fade-up {
-      opacity: 0; transform: translateY(28px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
-    }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-    /* Stagger para grids */
-    .fade-up:nth-child(2) { transition-delay: 0.08s; }
-    .fade-up:nth-child(3) { transition-delay: 0.16s; }
-    .fade-up:nth-child(4) { transition-delay: 0.24s; }
-    .fade-up:nth-child(5) { transition-delay: 0.08s; }
-    .fade-up:nth-child(6) { transition-delay: 0.16s; }
-
-    /* ══════════════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════════════ */
-    @media (max-width: 960px) {
-      .hero-inner    { grid-template-columns: 1fr; }
-      .hero-visual   { display: none; }
-      .servicios-grid, .testi-grid { grid-template-columns: repeat(2, 1fr); }
-      .proceso-grid  { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid   { grid-template-columns: 1fr 1fr; }
-      .cta-banner    { flex-direction: column; text-align: center; padding: 48px 36px; }
-      .cta-btns      { justify-content: center; }
-    }
-    @media (max-width: 620px) {
-      .nav-links     { display: none; position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; background: var(--blanco); padding: 24px; border-bottom: 1px solid var(--borde); box-shadow: var(--sombra); gap: 16px; z-index: 99; }
-      .nav-links.open { display: flex; }
-      .hamburger     { display: flex; }
-      .servicios-grid, .testi-grid { grid-template-columns: 1fr; }
-      .proceso-grid  { grid-template-columns: 1fr 1fr; }
-      .footer-grid   { grid-template-columns: 1fr; }
-      .hero-stats    { gap: 20px; }
-      .hero-btns     { flex-direction: column; }
-      .hero-btns .btn { justify-content: center; }
-      .cta-banner    { padding: 36px 24px; }
-      .section       { padding: 64px 0; }
-    }
-  </style>
 </head>
 <body>
 
@@ -353,15 +27,15 @@
   <!-- ════════════ HEADER ════════════ -->
   <header class="header">
     <nav class="nav container" aria-label="Navegación principal">
-      <a href="index.html" class="logo" aria-label="Graphio — ir al inicio">Graph<span>io</span></a>
+      <a href="Graphio/index.html" class="logo" aria-label="Graphio — ir al inicio">Graph<span>io</span></a>
 
       <ul class="nav-links" id="nav-links">
-        <li><a href="index.html" class="active" aria-current="page">Inicio</a></li>
-        <li><a href="pages/servicios.html">Servicios</a></li>
-        <li><a href="pages/nosotros.html">Nosotros</a></li>
-        <li><a href="pages/blog.html">Blog</a></li>
+        <li><a href="Graphio/index.html" class="active" aria-current="page">Inicio</a></li>
+        <li><a href="Graphio/pages/servicios.html">Servicios</a></li>
+        <li><a href="Graphio/pages/nosotros.html">Nosotros</a></li>
+        <li><a href="Graphio/pages/blog.html">Blog</a></li>
         <li>
-          <a href="pages/contacto.html" class="btn btn-primary" style="padding:10px 22px;font-size:0.86rem;">
+          <a href="Graphio/pages/contacto.html" class="btn btn-primary" style="padding:10px 22px;font-size:0.86rem;">
             Presupuesto gratis
           </a>
         </li>
@@ -391,10 +65,10 @@
               Respondemos tu presupuesto en menos de 24&nbsp;horas.
             </p>
             <div class="hero-btns">
-              <a href="pages/contacto.html" class="btn btn-primary">
+              <a href="Graphio/pages/contacto.html" class="btn btn-primary">
                 ✉️ Pide presupuesto gratis
               </a>
-              <a href="pages/servicios.html" class="btn btn-secondary">
+              <a href="Graphio/pages/servicios.html" class="btn btn-secondary">
                 Ver servicios →
               </a>
             </div>
@@ -453,47 +127,47 @@
     <!-- ════════════ SERVICIOS ════════════ -->
     <section class="section" aria-labelledby="servicios-titulo">
       <div class="container">
-        <div class="section-header fade-up">
+        <div class="section-header">
           <div class="badge">Nuestros servicios</div>
           <h2 id="servicios-titulo">Todo lo que tu marca necesita para brillar</h2>
           <p>Desde una tarjeta de visita hasta una campaña de gran formato, lo hacemos con la misma atención al detalle.</p>
         </div>
 
         <div class="servicios-grid">
-          <article class="srv-card fade-up">
+          <article class="srv-card">
             <div class="srv-icon" aria-hidden="true">📄</div>
             <h3>Material corporativo</h3>
             <p>Tarjetas de visita, folletos, dípticos, catálogos y papelería. Imagen profesional desde el primer contacto.</p>
           </article>
-          <article class="srv-card fade-up">
+          <article class="srv-card">
             <div class="srv-icon" aria-hidden="true">🖼️</div>
             <h3>Gran formato</h3>
             <p>Lonas, vinilos, roll-ups y señalética. Impacto visual para ferias, eventos y puntos de venta.</p>
           </article>
-          <article class="srv-card fade-up">
+          <article class="srv-card">
             <div class="srv-icon" aria-hidden="true">📦</div>
             <h3>Packaging</h3>
             <p>Cajas, bolsas, sobres y etiquetas personalizadas. Haz que cada entrega sea una experiencia de marca.</p>
           </article>
-          <article class="srv-card fade-up">
+          <article class="srv-card">
             <div class="srv-icon" aria-hidden="true">🎁</div>
             <h3>Regalo promocional</h3>
             <p>Merchandising con tu marca: libretas, bolígrafos, tazas, camisetas para fidelizar a tus clientes.</p>
           </article>
-          <article class="srv-card fade-up">
+          <article class="srv-card">
             <div class="srv-icon" aria-hidden="true">✏️</div>
             <h3>Diseño gráfico</h3>
             <p>Si no tienes el diseño listo, lo creamos. Logotipos, identidad visual y adaptación de archivos para imprenta.</p>
           </article>
-          <article class="srv-card fade-up">
+          <article class="srv-card">
             <div class="srv-icon" aria-hidden="true">🚚</div>
             <h3>Envío a toda España</h3>
             <p>Plazos claros, embalaje seguro y seguimiento de tu pedido. Entregamos donde lo necesites.</p>
           </article>
         </div>
 
-        <div class="servicios-cta fade-up">
-          <a href="pages/servicios.html" class="btn btn-primary">Ver todos los servicios</a>
+        <div class="servicios-cta">
+          <a href="Graphio/pages/servicios.html" class="btn btn-primary">Ver todos los servicios</a>
         </div>
       </div>
     </section>
@@ -501,7 +175,7 @@
     <!-- ════════════ PROCESO ════════════ -->
     <section class="section section-dark" aria-labelledby="proceso-titulo">
       <div class="container">
-        <div class="section-header fade-up">
+        <div class="section-header">
           <div class="badge" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.9);">
             Así trabajamos
           </div>
@@ -510,22 +184,22 @@
         </div>
 
         <div class="proceso-grid">
-          <div class="paso fade-up">
+          <div class="paso">
             <div class="paso-num" aria-hidden="true">1</div>
             <h3>Pide presupuesto</h3>
             <p>Cuéntanos qué necesitas. Te respondemos en menos de 24&nbsp;horas con precio y plazo.</p>
           </div>
-          <div class="paso fade-up">
+          <div class="paso">
             <div class="paso-num" aria-hidden="true">2</div>
             <h3>Aprueba el diseño</h3>
             <p>Revisamos y adaptamos tu arte. Si no tienes diseño, lo creamos nosotros.</p>
           </div>
-          <div class="paso fade-up">
+          <div class="paso">
             <div class="paso-num" aria-hidden="true">3</div>
             <h3>Producción</h3>
             <p>Ponemos en marcha la producción con control de calidad en cada etapa.</p>
           </div>
-          <div class="paso fade-up">
+          <div class="paso">
             <div class="paso-num" aria-hidden="true">4</div>
             <h3>Recíbelo</h3>
             <p>Entregamos en tu dirección con embalaje seguro y en el plazo acordado.</p>
@@ -537,13 +211,13 @@
     <!-- ════════════ TESTIMONIOS ════════════ -->
     <section class="section section-alt" aria-labelledby="testi-titulo">
       <div class="container">
-        <div class="section-header fade-up">
+        <div class="section-header">
           <div class="badge">Lo que dicen nuestros clientes</div>
           <h2 id="testi-titulo">Más de 500 empresas confían en Graphio</h2>
         </div>
 
         <div class="testi-grid">
-          <article class="testi fade-up">
+          <article class="testi">
             <div class="estrellas" aria-label="5 estrellas">★★★★★</div>
             <p class="testi-txt">
               "Llevamos 3 años trabajando con ellos para todos nuestros eventos. La calidad
@@ -558,7 +232,7 @@
             </div>
           </article>
 
-          <article class="testi fade-up">
+          <article class="testi">
             <div class="estrellas" aria-label="5 estrellas">★★★★★</div>
             <p class="testi-txt">
               "Pedí flyers para mi academia y el resultado fue mucho mejor de lo esperado.
@@ -573,7 +247,7 @@
             </div>
           </article>
 
-          <article class="testi fade-up">
+          <article class="testi">
             <div class="estrellas" aria-label="5 estrellas">★★★★★</div>
             <p class="testi-txt">
               "El packaging personalizado que hicieron para nuestra línea de cosméticos es
@@ -594,12 +268,12 @@
     <!-- ════════════ FAQ ════════════ -->
     <section class="section" aria-labelledby="faq-titulo">
       <div class="container">
-        <div class="section-header fade-up">
+        <div class="section-header">
           <div class="badge">Preguntas frecuentes</div>
           <h2 id="faq-titulo">Todo lo que necesitas saber</h2>
         </div>
 
-        <div class="faq-wrap fade-up" role="list">
+        <div class="faq-wrap" role="list">
 
           <div class="faq-item" role="listitem">
             <button class="faq-q" aria-expanded="false" aria-controls="faq1">
@@ -663,13 +337,13 @@
     <!-- ════════════ CTA BANNER ════════════ -->
     <section class="section" style="padding-top:0;" aria-label="Llamada a la acción">
       <div class="container">
-        <div class="cta-banner fade-up">
+        <div class="cta-banner">
           <div>
             <h2>¿Listo para imprimir tu marca?</h2>
             <p>Pide tu presupuesto ahora. Sin compromiso, sin letra pequeña.</p>
           </div>
           <div class="cta-btns">
-            <a href="pages/contacto.html" class="btn btn-blanco">Solicitar presupuesto</a>
+            <a href="Graphio/pages/contacto.html" class="btn btn-blanco">Solicitar presupuesto</a>
             <a href="https://wa.me/34600000000" class="btn btn-naranja" target="_blank" rel="noopener">
               💬 WhatsApp directo
             </a>
@@ -694,26 +368,26 @@
         <nav class="footer-col" aria-label="Servicios">
           <h4>Servicios</h4>
           <ul>
-            <li><a href="pages/servicios.html">Material corporativo</a></li>
-            <li><a href="pages/servicios.html">Gran formato</a></li>
-            <li><a href="pages/servicios.html">Packaging</a></li>
-            <li><a href="pages/servicios.html">Regalo promocional</a></li>
+            <li><a href="Graphio/pages/servicios.html">Material corporativo</a></li>
+            <li><a href="Graphio/pages/servicios.html">Gran formato</a></li>
+            <li><a href="Graphio/pages/servicios.html">Packaging</a></li>
+            <li><a href="Graphio/pages/servicios.html">Regalo promocional</a></li>
           </ul>
         </nav>
         <nav class="footer-col" aria-label="Empresa">
           <h4>Empresa</h4>
           <ul>
-            <li><a href="pages/nosotros.html">Sobre nosotros</a></li>
-            <li><a href="pages/blog.html">Blog</a></li>
-            <li><a href="pages/contacto.html">Contacto</a></li>
+            <li><a href="Graphio/pages/nosotros.html">Sobre nosotros</a></li>
+            <li><a href="Graphio/pages/blog.html">Blog</a></li>
+            <li><a href="Graphio/pages/contacto.html">Contacto</a></li>
           </ul>
         </nav>
         <nav class="footer-col" aria-label="Legal">
           <h4>Legal</h4>
           <ul>
-            <li><a href="pages/legal/aviso-legal.html">Aviso legal</a></li>
-            <li><a href="pages/legal/privacidad.html">Privacidad</a></li>
-            <li><a href="pages/legal/cookies.html">Cookies</a></li>
+            <li><a href="Graphio/pages/legal/aviso-legal.html">Aviso legal</a></li>
+            <li><a href="Graphio/pages/legal/privacidad.html">Privacidad</a></li>
+            <li><a href="Graphio/pages/legal/cookies.html">Cookies</a></li>
           </ul>
         </nav>
       </div>
@@ -721,64 +395,15 @@
       <div class="footer-bottom">
         <p>© 2025 Graphio. Todos los derechos reservados.</p>
         <nav class="footer-legal" aria-label="Navegación legal">
-          <a href="pages/legal/aviso-legal.html">Aviso legal</a>
-          <a href="pages/legal/privacidad.html">Privacidad</a>
-          <a href="pages/legal/cookies.html">Cookies</a>
+          <a href="Graphio/pages/legal/aviso-legal.html">Aviso legal</a>
+          <a href="Graphio/pages/legal/privacidad.html">Privacidad</a>
+          <a href="Graphio/pages/legal/cookies.html">Cookies</a>
         </nav>
       </div>
     </div>
   </footer>
 
-  <script>
-    // ── HAMBURGER MENU ──────────────────────────────
-    const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('nav-links');
 
-    hamburger.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen);
-    });
-
-    // Cerrar menú al hacer clic en un enlace
-    navLinks.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    // ── FAQ ACORDEÓN ────────────────────────────────
-    document.querySelectorAll('.faq-q').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item   = btn.parentElement;
-        const isOpen = item.classList.contains('open');
-
-        // Cerrar todos
-        document.querySelectorAll('.faq-item').forEach(i => {
-          i.classList.remove('open');
-          i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
-        });
-
-        // Abrir el clicado si estaba cerrado
-        if (!isOpen) {
-          item.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-
-    // ── ANIMACIONES SCROLL (IntersectionObserver) ───
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // una sola vez
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  </script>
 
 </body>
 </html>
