@@ -1,0 +1,11 @@
+.servicios-detalle{display:flex;flex-direction:column;gap:88px}
+    .srv-fila{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+    .srv-fila.rev{direction:rtl}
+    .srv-fila.rev>*{direction:ltr}
+    .srv-visual{background:linear-gradient(135deg,#eef4ff 0%,#e8f0ff 100%);border-radius:20px;padding:48px;text-align:center;font-size:4.5rem;border:1px solid var(--borde)}
+    .srv-info h2{font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:14px}
+    .srv-info p{margin-bottom:20px}
+    .srv-lista{display:flex;flex-direction:column;gap:9px;margin-bottom:28px}
+    .srv-lista li{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--oscuro)}
+    .srv-lista li::before{content:'✓';color:var(--azul);font-weight:700;flex-shrink:0;margin-top:1px}
+    @media(max-width:900px){.srv-fila{grid-template-columns:1fr}.srv-fila.rev{direction:ltr}.srv-visual{font-size:3rem;padding:32px}}

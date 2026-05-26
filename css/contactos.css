@@ -1,0 +1,33 @@
+.contacto-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:start}
+    .contacto-info h2{margin-bottom:14px}
+    .contacto-items{display:flex;flex-direction:column;gap:20px;margin-top:28px}
+    .contacto-item{display:flex;align-items:flex-start;gap:16px}
+    .c-icon{width:44px;height:44px;border-radius:10px;background:rgba(58,134,255,.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+    .c-item-title{font-weight:600;font-size:.88rem;color:var(--oscuro);margin-bottom:2px}
+    .c-item-val{font-size:.88rem;color:var(--gris)}
+    .c-item-val a{color:var(--azul)}
+
+    .form-card{background:var(--blanco);border-radius:20px;padding:40px;border:1px solid var(--borde);box-shadow:var(--sombra)}
+    .form-card h3{font-size:1.4rem;margin-bottom:24px;color:var(--oscuro)}
+    .form-body{display:flex;flex-direction:column;gap:18px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-group{display:flex;flex-direction:column;gap:5px}
+    label{font-size:.84rem;font-weight:600;color:var(--oscuro)}
+    input,select,textarea{padding:12px 15px;border:1.5px solid var(--borde);border-radius:10px;font-family:var(--font-b);font-size:.91rem;color:var(--oscuro);background:var(--blanco);transition:var(--trans);width:100%;outline:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--azul);box-shadow:0 0 0 3px rgba(58,134,255,.12)}
+    textarea{resize:vertical;min-height:120px}
+    .field-hint{font-size:.76rem;color:var(--gris)}
+    .field-error{font-size:.76rem;color:#E24B4A}
+    .checkbox-wrap{display:flex;align-items:flex-start;gap:10px}
+    .checkbox-wrap input[type=checkbox]{width:auto;margin-top:2px;flex-shrink:0;cursor:pointer}
+    .checkbox-label{font-size:.78rem;color:var(--gris);font-weight:400;line-height:1.5}
+    .checkbox-label a{color:var(--azul)}
+    .form-submit{width:100%;justify-content:center;padding:15px;font-size:1rem}
+
+    #form-success{display:none;text-align:center;padding:24px}
+    #form-success .success-icon{font-size:3.5rem;margin-bottom:16px}
+    #form-success h3{margin-bottom:10px}
+    #form-success p{margin-bottom:24px}
+
+    @media(max-width:900px){.contacto-grid{grid-template-columns:1fr}}
+    @media(max-width:580px){.form-row{grid-template-columns:1fr}.form-card{padding:28px 20px}}
