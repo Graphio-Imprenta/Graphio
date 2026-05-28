@@ -10,32 +10,323 @@
   <meta property="og:description" content="Imprenta online y servicios gráficos profesionales. Presupuesto gratis en 24h." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://Graphio-Imprenta.github.io/Graphio/" />
-  <link rel="stylesheet" href="css/main.css">
   <link rel="canonical" href="https://Graphio-Imprenta.github.io/Graphio/" />
-  <link rel="icon" type="image/x-icon" href="Graphio/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-  <!-- ── WHATSAPP FLOTANTE ── -->
-  <a href="https://wa.me/34600000000?text=Hola%2C%20me%20gustar%C3%ADa%20solicitar%20un%20presupuesto"
-     class="wa-btn" target="_blank" rel="noopener noreferrer"
-     aria-label="Contactar por WhatsApp">💬</a>
+  <!-- ════════ CHATBOT FLOTANTE ════════ -->
+
+  <!-- Botón de apertura -->
+  <button id="chat-toggle" aria-label="Abrir asistente virtual" aria-expanded="false" aria-controls="chat-window">
+    <span class="icon-open" aria-hidden="true">💬</span>
+    <span class="icon-close" aria-hidden="true">✕</span>
+  </button>
+
+  <!-- Ventana del chat -->
+  <div id="chat-window" role="dialog" aria-label="Asistente virtual de Graphio" aria-modal="false">
+
+    <div class="chat-header">
+      <div class="chat-avatar" aria-hidden="true">🖨️</div>
+      <div class="chat-header-info">
+        <div class="chat-name">Asistente Graphio</div>
+        <div class="chat-status"><span class="chat-dot"></span> En línea</div>
+      </div>
+    </div>
+
+    <div class="chat-body" id="chat-body" aria-live="polite" aria-label="Conversación">
+      <!-- Los mensajes se insertan aquí por JS -->
+    </div>
+
+    <div class="chat-footer">
+      <input type="text" id="chat-input" placeholder="Escribe tu pregunta…"
+             aria-label="Escribe tu mensaje" autocomplete="off" />
+      <button id="chat-send" aria-label="Enviar mensaje">
+        <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <script>
+  // ═══════════════════════════════════════════════════════
+  //  GRAPHIO CHATBOT — 100% local, sin API externa
+  //  Flujo guiado en JSON + detección de palabras clave
+  // ═══════════════════════════════════════════════════════
+
+  // ── FLUJO PRINCIPAL EN JSON ──────────────────────────
+  const FLOW = {
+    welcome: {
+      text: "¡Hola! Soy el asistente de Graphio 👋 ¿En qué puedo ayudarte hoy?",
+      options: [
+        { label: "🖨️ Ver nuestros servicios",  next: "servicios"    },
+        { label: "💬 Pedir un presupuesto",    next: "presupuesto"  },
+        { label: "ℹ️ Sobre nosotros",           next: "nosotros"     },
+        { label: "📝 Leer el blog",             next: "blog"         },
+        { label: "🤔 Tengo otra pregunta",       next: "freetext"     },
+      ]
+    },
+    servicios: {
+      text: "Ofrecemos estos servicios principales. ¿Cuál te interesa?",
+      options: [
+        { label: "📄 Material corporativo",       next: "srv_corporativo"  },
+        { label: "🖼️ Gran formato",               next: "srv_granformato"  },
+        { label: "📦 Packaging personalizado",    next: "srv_packaging"    },
+        { label: "🎁 Regalo promocional",         next: "srv_regalo"       },
+        { label: "✏️ Diseño gráfico",             next: "srv_diseno"       },
+        { label: "← Volver al inicio",            next: "welcome"          },
+      ]
+    },
+    srv_corporativo: {
+      text: "Imprimimos tarjetas de visita, folletos, dípticos, catálogos y toda la papelería de tu empresa. ¿Te hacemos un presupuesto?",
+      options: [
+        { label: "✉️ Sí, quiero presupuesto",  action: "go", url: "pages/contacto.html" },
+        { label: "📋 Ver todos los servicios", action: "go", url: "pages/servicios.html" },
+        { label: "← Volver",                   next: "servicios" },
+      ]
+    },
+    srv_granformato: {
+      text: "Lonas, vinilos, roll-ups, carteles y señalética para ferias, eventos y escaparates. ¿Te interesa?",
+      options: [
+        { label: "✉️ Pedir presupuesto",       action: "go", url: "pages/contacto.html" },
+        { label: "📋 Ver todos los servicios", action: "go", url: "pages/servicios.html" },
+        { label: "← Volver",                   next: "servicios" },
+      ]
+    },
+    srv_packaging: {
+      text: "Cajas, bolsas, sobres y etiquetas personalizadas con tu logo. Haz que cada entrega sea una experiencia de marca.",
+      options: [
+        { label: "✉️ Pedir presupuesto",       action: "go", url: "pages/contacto.html" },
+        { label: "📋 Ver todos los servicios", action: "go", url: "pages/servicios.html" },
+        { label: "← Volver",                   next: "servicios" },
+      ]
+    },
+    srv_regalo: {
+      text: "Bolígrafos, libretas, tazas, camisetas y mucho más con tu marca. El merchandising que fideliza a tus clientes.",
+      options: [
+        { label: "✉️ Pedir presupuesto",       action: "go", url: "pages/contacto.html" },
+        { label: "📋 Ver todos los servicios", action: "go", url: "pages/servicios.html" },
+        { label: "← Volver",                   next: "servicios" },
+      ]
+    },
+    srv_diseno: {
+      text: "Si no tienes el diseño listo, lo creamos nosotros. Solo necesitamos tu logo y los colores de tu marca.",
+      options: [
+        { label: "✉️ Hablar con el equipo",    action: "go", url: "pages/contacto.html" },
+        { label: "📋 Ver todos los servicios", action: "go", url: "pages/servicios.html" },
+        { label: "← Volver",                   next: "servicios" },
+      ]
+    },
+    presupuesto: {
+      text: "Rellena el formulario en un minuto y te respondemos en menos de 24 horas. Sin compromiso y sin letra pequeña. 🚀",
+      options: [
+        { label: "✉️ Ir al formulario", action: "go", url: "pages/contacto.html" },
+        { label: "← Volver al inicio",  next: "welcome" },
+      ]
+    },
+    nosotros: {
+      text: "Somos una empresa de servicios gráficos con más de 15 años de experiencia, más de 500 clientes y una filosofía simple: calidad, rapidez y atención real.",
+      options: [
+        { label: "👥 Ver página sobre nosotros", action: "go", url: "pages/nosotros.html" },
+        { label: "← Volver al inicio",           next: "welcome" },
+      ]
+    },
+    blog: {
+      text: "En el blog encontrarás consejos sobre impresión, diseño gráfico y marketing visual. Todo gratis y sin registro.",
+      options: [
+        { label: "📝 Ir al blog",      action: "go", url: "pages/blog.html" },
+        { label: "← Volver al inicio", next: "welcome" },
+      ]
+    },
+    precios: {
+      text: "Los precios dependen del producto, la cantidad y los acabados. Pedimos presupuesto personalizado y gratis, ¡te respondemos en menos de 24h!",
+      options: [
+        { label: "✉️ Pedir mi presupuesto gratis", action: "go", url: "pages/contacto.html" },
+        { label: "← Volver al inicio",              next: "welcome" },
+      ]
+    },
+    plazo: {
+      text: "Respondemos presupuestos en menos de 24 horas. Los plazos de producción y entrega se detallan en cada presupuesto según el pedido.",
+      options: [
+        { label: "✉️ Solicitar presupuesto", action: "go", url: "pages/contacto.html" },
+        { label: "← Volver al inicio",       next: "welcome" },
+      ]
+    },
+    envio: {
+      text: "Enviamos a toda España: Península, Baleares y Canarias. El coste y el plazo de envío se incluyen en el presupuesto personalizado.",
+      options: [
+        { label: "✉️ Pedir presupuesto", action: "go", url: "pages/contacto.html" },
+        { label: "← Volver al inicio",   next: "welcome" },
+      ]
+    },
+    diseno_duda: {
+      text: "No necesitas tener el diseño listo. Si tienes logo y colores, nosotros preparamos el arte. Si no tienes nada, también te ayudamos desde cero.",
+      options: [
+        { label: "✉️ Hablar con diseño",   action: "go", url: "pages/contacto.html" },
+        { label: "← Volver al inicio",     next: "welcome" },
+      ]
+    },
+    contacto: {
+      text: "Puedes contactarnos por el formulario de la web o directamente por email a hola@graphio.es. Respondemos en menos de 24h.",
+      options: [
+        { label: "✉️ Ir al formulario de contacto", action: "go", url: "pages/contacto.html" },
+        { label: "← Volver al inicio",               next: "welcome" },
+      ]
+    },
+    freetext: {
+      text: "Escribe tu pregunta y te respondo lo mejor que pueda 👇",
+      options: []
+    },
+    fallback: {
+      text: "No estoy seguro de entender tu pregunta, pero puedo guiarte a donde necesites. ¿Qué buscas?",
+      options: [
+        { label: "🖨️ Ver servicios",          next: "servicios"   },
+        { label: "💬 Pedir presupuesto",      next: "presupuesto" },
+        { label: "📞 Ir a contacto",          next: "contacto"    },
+        { label: "← Volver al inicio",        next: "welcome"     },
+      ]
+    }
+  };
+
+  // ── DETECCIÓN DE PALABRAS CLAVE ──────────────────────
+  // Cada entrada: [ [palabras que activan], step_destino ]
+  const KEYWORDS = [
+    [ ["precio","cuesta","coste","tarifa","cuánto","cuanto","presupuesto","cotar","quote"],     "precios"       ],
+    [ ["plazo","tiempo","cuándo","cuando","urgente","rápido","rapido","entrega","días","dias"],  "plazo"         ],
+    [ ["envío","envio","enviar","envíais","mandar","recibir","shipping","peninsula","canarias"], "envio"         ],
+    [ ["diseño","diseñador","diseñar","arte","archivo","logo","logotipo","no tengo"],           "diseno_duda"   ],
+    [ ["tarjeta","folleto","díptico","diptico","catálogo","catalogo","papelería","papeleria",
+       "corporativo","empresa","flyer"],                                                         "srv_corporativo"],
+    [ ["lona","vinilo","roll","cartel","señal","señalética","feria","evento","exterior"],        "srv_granformato"],
+    [ ["caja","bolsa","embalaje","packaging","etiqueta","sobre","unboxing"],                    "srv_packaging"  ],
+    [ ["regalo","merchandising","bolígrafo","boligrafo","taza","camiseta","promo"],             "srv_regalo"     ],
+    [ ["servicio","catálogo","que hacéis","qué hacéis","ofrecéis","ofrece","tenéis","tienen"],  "servicios"      ],
+    [ ["contacto","contactar","email","mail","teléfono","telefono","hablar","llamar"],           "contacto"       ],
+    [ ["blog","artículo","articulo","consejo","leer","aprend"],                                  "blog"           ],
+    [ ["quién","quien","sois","somos","empresa","historia","años","experiencia"],               "nosotros"       ],
+    [ ["hola","buenas","buenos","hey","hi","hello"],                                             "welcome"        ],
+  ];
+
+  function detectStep(text) {
+    const t = text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+    for (const [words, step] of KEYWORDS) {
+      if (words.some(w => t.includes(w))) return step;
+    }
+    return "fallback";
+  }
+
+  // ── DOM ──────────────────────────────────────────────
+  const toggle    = document.getElementById('chat-toggle');
+  const chatWin   = document.getElementById('chat-window');
+  const chatBody  = document.getElementById('chat-body');
+  const chatInput = document.getElementById('chat-input');
+  const chatSend  = document.getElementById('chat-send');
+
+  // ── TOGGLE ───────────────────────────────────────────
+  toggle.addEventListener('click', () => {
+    const isOpen = chatWin.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    toggle.setAttribute('aria-expanded', isOpen);
+    if (isOpen && chatBody.children.length === 0) renderStep('welcome');
+    if (isOpen) setTimeout(() => chatInput.focus(), 200);
+  });
+
+  // ── RENDER STEP ──────────────────────────────────────
+  function renderStep(key) {
+    const step = FLOW[key];
+    if (!step) return;
+    setTimeout(() => {
+      addBotMsg(step.text);
+      if (step.options && step.options.length > 0) addOptions(step.options);
+    }, 280);
+  }
+
+  function addBotMsg(text) {
+    const d = document.createElement('div');
+    d.className = 'msg msg-bot';
+    d.textContent = text;
+    chatBody.appendChild(d);
+    scrollBottom();
+  }
+
+  function addUserMsg(text) {
+    const d = document.createElement('div');
+    d.className = 'msg msg-user';
+    d.textContent = text;
+    chatBody.appendChild(d);
+    scrollBottom();
+  }
+
+  function addOptions(opts) {
+    const wrap = document.createElement('div');
+    wrap.className = 'chat-options';
+    opts.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'chat-opt';
+      btn.textContent = opt.label;
+      btn.addEventListener('click', () => {
+        wrap.remove();
+        addUserMsg(opt.label);
+        if (opt.action === 'go') {
+          addBotMsg('¡Perfecto! Te llevo ahora mismo… 👉');
+          setTimeout(() => { window.location.href = opt.url; }, 900);
+        } else if (opt.next) {
+          renderStep(opt.next);
+        }
+      });
+      wrap.appendChild(btn);
+    });
+    chatBody.appendChild(wrap);
+    scrollBottom();
+  }
+
+  function scrollBottom() {
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  // ── TEXTO LIBRE → detección de keywords ─────────────
+  function sendMessage() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    chatInput.value = '';
+    document.querySelectorAll('.chat-options').forEach(el => el.remove());
+    addUserMsg(text);
+    const step = detectStep(text);
+    renderStep(step);
+  }
+
+  chatSend.addEventListener('click', sendMessage);
+  chatInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') sendMessage();
+  });
+
+  // Cerrar con Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && chatWin.classList.contains('open')) {
+      chatWin.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
+    }
+  });
+  </script>
 
   <!-- ════════════ HEADER ════════════ -->
   <header class="header">
     <nav class="nav container" aria-label="Navegación principal">
       <a href="index.html" class="logo" aria-label="Graphio — ir al inicio">Graph<span>io</span></a>
 
-      <ul class="nav-links" id="nav-links">
+      <ul class="nav-links" id="nav-links" role="list">
         <li><a href="index.html" class="active" aria-current="page">Inicio</a></li>
         <li><a href="pages/servicios.html">Servicios</a></li>
         <li><a href="pages/nosotros.html">Nosotros</a></li>
         <li><a href="pages/blog.html">Blog</a></li>
         <li>
-          <a href="Graphio/pages/contacto.html" class="btn btn-primary" style="padding:10px 22px;font-size:0.86rem;">
+          <a href="pages/contacto.html" class="btn btn-primary" style="padding:10px 22px;font-size:0.86rem;">
             Presupuesto gratis
           </a>
         </li>
@@ -47,16 +338,16 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main-content">
 
     <!-- ════════════ HERO ════════════ -->
-    <section class="hero" aria-label="Presentación principal">
+    <section class="hero" aria-labelledby="hero-titulo" aria-label="Presentación principal">
       <div class="container">
         <div class="hero-inner">
 
           <div class="hero-content">
             <div class="badge">🖨️ Imprenta profesional online</div>
-            <h1 class="hero-title">
+            <h1 class="hero-title" id="hero-titulo">
               Tu material gráfico,<br>
               <em>impreso con calidad</em>
             </h1>
@@ -74,16 +365,16 @@
             </div>
             <div class="hero-stats">
               <div class="stat">
-                <div class="stat-num">+500</div>
-                <div class="stat-txt">Clientes satisfechos</div>
+                <div class="stat-num" aria-label="Más de 500 clientes satisfechos">+500</div>
+                <div class="stat-txt" aria-hidden="true">Clientes satisfechos</div>
               </div>
               <div class="stat">
-                <div class="stat-num">24h</div>
-                <div class="stat-txt">Respuesta garantizada</div>
+                <div class="stat-num" aria-label="Respuesta garantizada en 24 horas">24h</div>
+                <div class="stat-txt" aria-hidden="true">Respuesta garantizada</div>
               </div>
               <div class="stat">
-                <div class="stat-num">15+</div>
-                <div class="stat-txt">Años de experiencia</div>
+                <div class="stat-num" aria-label="Más de 15 años de experiencia">15+</div>
+                <div class="stat-txt" aria-hidden="true">Años de experiencia</div>
               </div>
             </div>
           </div>
@@ -127,55 +418,55 @@
     <!-- ════════════ SERVICIOS ════════════ -->
     <section class="section" aria-labelledby="servicios-titulo">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header fade-up">
           <div class="badge">Nuestros servicios</div>
           <h2 id="servicios-titulo">Todo lo que tu marca necesita para brillar</h2>
           <p>Desde una tarjeta de visita hasta una campaña de gran formato, lo hacemos con la misma atención al detalle.</p>
         </div>
 
-        <div class="servicios-grid">
-          <article class="srv-card">
+        <ul class="servicios-grid" aria-label="Catálogo de servicios">
+          <article class="srv-card fade-up">
             <div class="srv-icon" aria-hidden="true">📄</div>
             <h3>Material corporativo</h3>
             <p>Tarjetas de visita, folletos, dípticos, catálogos y papelería. Imagen profesional desde el primer contacto.</p>
           </article>
-          <article class="srv-card">
+          <article class="srv-card fade-up">
             <div class="srv-icon" aria-hidden="true">🖼️</div>
             <h3>Gran formato</h3>
             <p>Lonas, vinilos, roll-ups y señalética. Impacto visual para ferias, eventos y puntos de venta.</p>
           </article>
-          <article class="srv-card">
+          <article class="srv-card fade-up">
             <div class="srv-icon" aria-hidden="true">📦</div>
             <h3>Packaging</h3>
             <p>Cajas, bolsas, sobres y etiquetas personalizadas. Haz que cada entrega sea una experiencia de marca.</p>
           </article>
-          <article class="srv-card">
+          <article class="srv-card fade-up">
             <div class="srv-icon" aria-hidden="true">🎁</div>
             <h3>Regalo promocional</h3>
             <p>Merchandising con tu marca: libretas, bolígrafos, tazas, camisetas para fidelizar a tus clientes.</p>
           </article>
-          <article class="srv-card">
+          <article class="srv-card fade-up">
             <div class="srv-icon" aria-hidden="true">✏️</div>
             <h3>Diseño gráfico</h3>
             <p>Si no tienes el diseño listo, lo creamos. Logotipos, identidad visual y adaptación de archivos para imprenta.</p>
           </article>
-          <article class="srv-card">
+          <article class="srv-card fade-up">
             <div class="srv-icon" aria-hidden="true">🚚</div>
             <h3>Envío a toda España</h3>
             <p>Plazos claros, embalaje seguro y seguimiento de tu pedido. Entregamos donde lo necesites.</p>
           </article>
         </div>
 
-        <div class="servicios-cta">
+        <div class="servicios-cta fade-up">
           <a href="pages/servicios.html" class="btn btn-primary">Ver todos los servicios</a>
         </div>
       </div>
     </section>
 
     <!-- ════════════ PROCESO ════════════ -->
-    <section class="section section-dark" aria-labelledby="proceso-titulo">
+    <section class="section section-dark" aria-labelledby="proceso-titulo" aria-label="Proceso de trabajo en 4 pasos">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header fade-up">
           <div class="badge" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.9);">
             Así trabajamos
           </div>
@@ -183,42 +474,42 @@
           <p>Cuatro pasos simples para tener tu material impreso en manos.</p>
         </div>
 
-        <div class="proceso-grid">
-          <div class="paso">
+        <ol class="proceso-grid" aria-label="Pasos del proceso">
+          <li class="paso">
             <div class="paso-num" aria-hidden="true">1</div>
             <h3>Pide presupuesto</h3>
             <p>Cuéntanos qué necesitas. Te respondemos en menos de 24&nbsp;horas con precio y plazo.</p>
-          </div>
-          <div class="paso">
+          </li>
+          <li class="paso">
             <div class="paso-num" aria-hidden="true">2</div>
             <h3>Aprueba el diseño</h3>
             <p>Revisamos y adaptamos tu arte. Si no tienes diseño, lo creamos nosotros.</p>
-          </div>
-          <div class="paso">
+          </li>
+          <li class="paso">
             <div class="paso-num" aria-hidden="true">3</div>
             <h3>Producción</h3>
             <p>Ponemos en marcha la producción con control de calidad en cada etapa.</p>
-          </div>
-          <div class="paso">
+          </li>
+          <li class="paso" style="margin:0;">
             <div class="paso-num" aria-hidden="true">4</div>
             <h3>Recíbelo</h3>
             <p>Entregamos en tu dirección con embalaje seguro y en el plazo acordado.</p>
           </div>
-        </div>
+        </ol>
       </div>
     </section>
 
     <!-- ════════════ TESTIMONIOS ════════════ -->
     <section class="section section-alt" aria-labelledby="testi-titulo">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header fade-up">
           <div class="badge">Lo que dicen nuestros clientes</div>
           <h2 id="testi-titulo">Más de 500 empresas confían en Graphio</h2>
         </div>
 
-        <div class="testi-grid">
-          <article class="testi">
-            <div class="estrellas" aria-label="5 estrellas">★★★★★</div>
+        <ul class="testi-grid" aria-label="Testimonios de clientes">
+          <li class="testi">
+            <div class="estrellas" role="img" aria-label="Valoración: 5 de 5 estrellas">★★★★★</div>
             <p class="testi-txt">
               "Llevamos 3 años trabajando con ellos para todos nuestros eventos. La calidad
               de las lonas y carteles es excelente y siempre cumplen los plazos."
@@ -230,10 +521,9 @@
                 <div class="autor-empresa">Responsable de Marketing · Industrias Valco</div>
               </div>
             </div>
-          </article>
-
-          <article class="testi">
-            <div class="estrellas" aria-label="5 estrellas">★★★★★</div>
+          </li>
+          <li class="testi">
+            <div class="estrellas" role="img" aria-label="Valoración: 5 de 5 estrellas">★★★★★</div>
             <p class="testi-txt">
               "Pedí flyers para mi academia y el resultado fue mucho mejor de lo esperado.
               Me asesoraron sobre el formato y el papel ideal. Repetiré seguro."
@@ -245,10 +535,9 @@
                 <div class="autor-empresa">Propietario · Academia Idiomas Ruiz</div>
               </div>
             </div>
-          </article>
-
-          <article class="testi">
-            <div class="estrellas" aria-label="5 estrellas">★★★★★</div>
+          </li>
+          <li class="testi">
+            <div class="estrellas" role="img" aria-label="Valoración: 5 de 5 estrellas">★★★★★</div>
             <p class="testi-txt">
               "El packaging personalizado que hicieron para nuestra línea de cosméticos es
               increíble. Muchos clientes nos preguntan por el diseño. Trabajo impecable."
@@ -268,12 +557,12 @@
     <!-- ════════════ FAQ ════════════ -->
     <section class="section" aria-labelledby="faq-titulo">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header fade-up">
           <div class="badge">Preguntas frecuentes</div>
           <h2 id="faq-titulo">Todo lo que necesitas saber</h2>
         </div>
 
-        <div class="faq-wrap" role="list">
+        <div class="faq-wrap fade-up" role="list">
 
           <div class="faq-item" role="listitem">
             <button class="faq-q" aria-expanded="false" aria-controls="faq1">
@@ -337,14 +626,14 @@
     <!-- ════════════ CTA BANNER ════════════ -->
     <section class="section" style="padding-top:0;" aria-label="Llamada a la acción">
       <div class="container">
-        <div class="cta-banner">
+        <div class="cta-banner fade-up">
           <div>
             <h2>¿Listo para imprimir tu marca?</h2>
             <p>Pide tu presupuesto ahora. Sin compromiso, sin letra pequeña.</p>
           </div>
           <div class="cta-btns">
-            <a href="Graphio/pages/contacto.html" class="btn btn-blanco">Solicitar presupuesto</a>
-            <a href="https://wa.me/34600000000" class="btn btn-naranja" target="_blank" rel="noopener">
+            <a href="pages/contacto.html" class="btn btn-blanco">Solicitar presupuesto</a>
+            <a href="https://wa.me/34600000000" class="btn btn-naranja" target="_blank" rel="noopener noreferrer">
               💬 WhatsApp directo
             </a>
           </div>
@@ -355,7 +644,7 @@
   </main>
 
   <!-- ════════════ FOOTER ════════════ -->
-  <footer class="footer" aria-label="Pie de página">
+  <footer class="footer" role="contentinfo" aria-label="Pie de página">
     <div class="container">
       <div class="footer-grid">
         <div>
@@ -377,17 +666,17 @@
         <nav class="footer-col" aria-label="Empresa">
           <h4>Empresa</h4>
           <ul>
-            <li><a href="Graphio/pages/nosotros.html">Sobre nosotros</a></li>
-            <li><a href="Graphio/pages/blog.html">Blog</a></li>
-            <li><a href="Graphio/pages/contacto.html">Contacto</a></li>
+            <li><a href="pages/nosotros.html">Sobre nosotros</a></li>
+            <li><a href="pages/blog.html">Blog</a></li>
+            <li><a href="pages/contacto.html">Contacto</a></li>
           </ul>
         </nav>
         <nav class="footer-col" aria-label="Legal">
           <h4>Legal</h4>
           <ul>
-            <li><a href="Graphio/pages/legal/aviso-legal.html">Aviso legal</a></li>
-            <li><a href="Graphio/pages/legal/privacidad.html">Privacidad</a></li>
-            <li><a href="Graphio/pages/legal/cookies.html">Cookies</a></li>
+            <li><a href="pages/legal/aviso-legal.html">Aviso legal</a></li>
+            <li><a href="pages/legal/privacidad.html">Privacidad</a></li>
+            <li><a href="pages/legal/cookies.html">Cookies</a></li>
           </ul>
         </nav>
       </div>
@@ -395,15 +684,64 @@
       <div class="footer-bottom">
         <p>© 2025 Graphio. Todos los derechos reservados.</p>
         <nav class="footer-legal" aria-label="Navegación legal">
-          <a href="Graphio/pages/legal/aviso-legal.html">Aviso legal</a>
-          <a href="Graphio/pages/legal/privacidad.html">Privacidad</a>
-          <a href="Graphio/pages/legal/cookies.html">Cookies</a>
+          <a href="pages/legal/aviso-legal.html">Aviso legal</a>
+          <a href="pages/legal/privacidad.html">Privacidad</a>
+          <a href="pages/legal/cookies.html">Cookies</a>
         </nav>
       </div>
     </div>
   </footer>
 
-<script src="js/main.js"></script>
+  <script>
+    // ── HAMBURGER MENU ──────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Cerrar menú al hacer clic en un enlace
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ── FAQ ACORDEÓN ────────────────────────────────
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item   = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+
+        // Cerrar todos
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+        });
+
+        // Abrir el clicado si estaba cerrado
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // ── ANIMACIONES SCROLL (IntersectionObserver) ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // una sola vez
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
