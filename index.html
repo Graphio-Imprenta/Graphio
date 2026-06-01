@@ -21,12 +21,13 @@
        VARIABLES & RESET
     ══════════════════════════════════════ */
     :root {
-      --azul:       #3A86FF;
-      --azul-dark:  #2563eb;
-      --naranja:    #FF6B35;
+      --azul:       #2563eb;
+      --azul-dark:  #1d5bd4;
+      --naranja:    #C94A14;
+      --naranja-dark: #b84d26;
       --oscuro:     #1A1A2E;
       --claro:      #F8F9FA;
-      --gris:       #6C757D;
+      --gris:       #555f6e;
       --blanco:     #ffffff;
       --borde:      #E2E8F0;
       --sombra:     0 4px 32px rgba(26,26,46,0.09);
@@ -79,7 +80,7 @@
     .btn-secondary { background: transparent; color: var(--azul); border: 2px solid var(--azul); }
     .btn-secondary:hover { background: var(--azul); color: var(--blanco); transform: translateY(-2px); }
     .btn-naranja { background: var(--naranja); color: var(--blanco); }
-    .btn-naranja:hover { background: #e55a20; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,53,0.38); }
+    .btn-naranja:hover { background: var(--naranja-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,74,20,0.38); }
     .btn-blanco { background: var(--blanco); color: var(--oscuro); }
     .btn-blanco:hover { background: var(--claro); transform: translateY(-2px); }
 
@@ -89,7 +90,7 @@
     .badge {
       display: inline-block; padding: 5px 16px; border-radius: 50px;
       font-size: 0.74rem; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; background: rgba(58,134,255,0.1);
+      text-transform: uppercase; background: rgba(37,99,235,0.1);
       color: var(--azul); margin-bottom: 16px;
     }
 
@@ -141,6 +142,9 @@
       display: flex; flex-direction: column; gap: 12px;
       box-shadow: var(--sombra-md);
       position: relative; overflow: hidden;
+    }
+    .hero-visual > [aria-hidden="true"] {
+      display: flex; flex-direction: column; gap: 12px;
     }
     .hero-visual::before {
       content: ''; position: absolute; top: -40px; right: -40px;
@@ -487,7 +491,7 @@
       position: absolute;
       top: -100%;
       left: 0;
-      background: var(--azul, #3A86FF);
+      background: var(--azul, #2563eb);
       color: #fff;
       padding: 12px 24px;
       font-family: var(--font-b, sans-serif);
@@ -506,7 +510,7 @@
 
     /* Focus visible global — cumple WCAG 2.4.7 */
     *:focus-visible {
-      outline: 3px solid var(--azul, #3A86FF);
+      outline: 3px solid var(--azul, #2563eb);
       outline-offset: 3px;
       border-radius: 4px;
     }
@@ -539,7 +543,7 @@
     .srv-card:focus-within,
     .blog-card:focus-within,
     .testi:focus-within {
-      outline: 2px solid var(--azul, #3A86FF);
+      outline: 2px solid var(--azul, #2563eb);
       outline-offset: 2px;
     }
 
@@ -686,7 +690,7 @@
       <input type="text" id="chat-input" placeholder="Escribe tu pregunta…"
              aria-label="Escribe tu mensaje" autocomplete="off" />
       <button id="chat-send" aria-label="Enviar mensaje">
-        <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
       </button>
     </div>
   </div>
@@ -1019,37 +1023,39 @@
           </div>
 
           <!-- Visual oscuro con cards de servicios -->
-          <div class="hero-visual" aria-hidden="true">
-            <div class="hv-card">
-              <div class="hv-icon">🖨️</div>
-              <div>
-                <div class="hv-title">Material corporativo</div>
-                <div class="hv-sub">Tarjetas · Folletos · Catálogos</div>
+          <div class="hero-visual">
+            <div aria-hidden="true">
+              <div class="hv-card">
+                <div class="hv-icon">🖨️</div>
+                <div>
+                  <div class="hv-title">Material corporativo</div>
+                  <div class="hv-sub">Tarjetas · Folletos · Catálogos</div>
+                </div>
+              </div>
+              <div class="hv-card">
+                <div class="hv-icon">🖼️</div>
+                <div>
+                  <div class="hv-title">Gran formato</div>
+                  <div class="hv-sub">Lonas · Vinilos · Roll-ups</div>
+                </div>
+              </div>
+              <div class="hv-card">
+                <div class="hv-icon">📦</div>
+                <div>
+                  <div class="hv-title">Packaging</div>
+                  <div class="hv-sub">Cajas · Bolsas · Etiquetas</div>
+                </div>
+              </div>
+              <div class="hv-card">
+                <div class="hv-icon">🎁</div>
+                <div>
+                  <div class="hv-title">Regalo promocional</div>
+                  <div class="hv-sub">Merchandising corporativo</div>
+                </div>
               </div>
             </div>
-            <div class="hv-card">
-              <div class="hv-icon">🖼️</div>
-              <div>
-                <div class="hv-title">Gran formato</div>
-                <div class="hv-sub">Lonas · Vinilos · Roll-ups</div>
-              </div>
-            </div>
-            <div class="hv-card">
-              <div class="hv-icon">📦</div>
-              <div>
-                <div class="hv-title">Packaging</div>
-                <div class="hv-sub">Cajas · Bolsas · Etiquetas</div>
-              </div>
-            </div>
-            <div class="hv-card">
-              <div class="hv-icon">🎁</div>
-              <div>
-                <div class="hv-title">Regalo promocional</div>
-                <div class="hv-sub">Merchandising corporativo</div>
-              </div>
-            </div>
-            <a href="https://wa.me/34600000000" class="btn btn-naranja" target="_blank" rel="noopener noreferrer" style="justify-content:center;width:100%;margin-top:4px;">
-              💬 WhatsApp directo
+            <a href="https://wa.me/34600000000" class="btn btn-naranja" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp (abre en nueva pestaña)" style="justify-content:center;width:100%;margin-top:4px;">
+              <span aria-hidden="true">💬</span> WhatsApp directo
             </a>
           </div>
 
@@ -1275,8 +1281,8 @@
           </div>
           <div class="cta-btns">
             <a href="pages/contacto.html" class="btn btn-blanco">Solicitar presupuesto</a>
-            <a href="https://wa.me/34600000000" class="btn btn-naranja" target="_blank" rel="noopener noreferrer">
-              💬 WhatsApp directo
+            <a href="https://wa.me/34600000000" class="btn btn-naranja" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp (abre en nueva pestaña)">
+              <span aria-hidden="true">💬</span> WhatsApp directo
             </a>
           </div>
         </div>
