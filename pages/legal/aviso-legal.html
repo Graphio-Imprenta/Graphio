@@ -16,15 +16,139 @@
     .legal-wrap ul{margin:10px 0 18px 20px;list-style:disc;display:flex;flex-direction:column;gap:6px}
     .legal-wrap ul li{font-size:.92rem;color:var(--gris)}
     .legal-date{font-size:.8rem;color:var(--gris);margin-bottom:40px}
-    .legal-wrap a{color:var(--azul)}
+
+    /* Texto solo para lectores de pantalla */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ══ ACCESIBILIDAD WCAG 2.2 AA ══════════════════════════════════
+       Mejoras de accesibilidad — misma base que el resto de páginas
+    ══════════════════════════════════════════════════════════════════ */
+
+    /* Skip-to-content */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      background: #1a56db;
+      color: #fff;
+      padding: 12px 24px;
+      font-family: var(--font-b, sans-serif);
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 9999;
+      border-radius: 0 0 8px 0;
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 3px solid #fff;
+      outline-offset: 2px;
+    }
+
+    /* Focus visible global — cumple WCAG 2.4.7 */
+    *:focus-visible {
+      outline: 3px solid #1a56db;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    *:focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    /* Cursor pointer en elementos interactivos */
+    a, button, [role="button"], label[for] {
+      cursor: pointer;
+    }
+
+    /* Contraste mínimo en textos secundarios — WCAG 1.4.3 */
+    /* --gris (#555f6e sobre #fff) = ratio 6.46:1 ✅ */
+    /* --gris (#555f6e sobre #F8F9FA) = ratio 6.13:1 ✅ */
+
+    /* Tamaño mínimo de área táctil 44×44px — WCAG 2.5.5 */
+    .btn, .nav-links a, .hamburger, .faq-q {
+      min-height: 44px;
+    }
+    .hamburger {
+      min-width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Reducción de movimiento — WCAG 2.3.3 */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Alto contraste del sistema — WCAG 1.4.11 */
+    @media (forced-colors: active) {
+      .btn { border: 2px solid ButtonText; }
+    }
+
+    /* ══ WAVE/AXE FIXES — WCAG 1.4.3 Color Contrast ════════════════
+       Todos los ratios verificados ≥ 4.5:1
+    ═══════════════════════════════════════════════════════════════ */
+
+    /* 1. btn-primary: blanco sobre #1a56db = 6.18:1 ✅ */
+    .btn-primary { background: #1a56db !important; color: #ffffff !important; }
+    .btn-primary:hover { background: #1440b3 !important; }
+    .nav-links .btn-primary,
+    .nav-links a.btn-primary { color: #ffffff !important; }
+
+    /* 2. footer-desc y copyright sobre #1a1a2e: #9ba3ad = 6.69:1 ✅ */
+    .footer-desc,
+    .footer-bottom p,
+    .footer-bottom .footer-legal a { color: #9ba3ad !important; }
+
+    /* 3. footer-col-title sobre #1a1a2e: #9ba3ad = 6.69:1 ✅ */
+    .footer-col-title {
+      color: #9ba3ad !important;
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 18px;
+    }
+
+    /* 4. enlaces en contenido legal: #1a56db sobre blanco = 6.18:1 ✅
+          + subrayado para distinguirlos sin depender solo del color */
+    .legal-wrap a,
+    p a:not(.btn) {
+      color: #1a56db !important;
+      text-decoration: underline !important;
+      text-underline-offset: 2px;
+    }
+
+    /* 5. badge contrast: #1e40af sobre #dbeafe = 7.15:1 ✅ */
+    .badge { background: #dbeafe; color: #1e40af !important; }
+
+    /* 6. nav active */
+    .nav-links a.active { color: #1a5ce8 !important; }
   </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
 <header class="header">
   <nav class="nav container" aria-label="Navegación principal">
-    <a href="../../index.html" class="logo">Graph<span>io</span></a>
-    <ul class="nav-links" id="nav-links">
+    <a href="../../index.html" class="logo" aria-label="Graphio — ir al inicio">Graph<span>io</span></a>
+    <ul class="nav-links" id="nav-links" role="list">
       <li><a href="../../index.html">Inicio</a></li>
       <li><a href="../servicios.html">Servicios</a></li>
       <li><a href="../nosotros.html">Nosotros</a></li>
@@ -36,7 +160,8 @@
     </button>
   </nav>
 </header>
-<main>
+
+<main id="main-content">
   <section class="page-hero">
     <div class="container">
       <nav class="breadcrumb" aria-label="Migas de pan"><a href="../../index.html">Inicio</a><span>/</span><span>Aviso Legal</span></nav>
@@ -53,9 +178,9 @@
         <li><strong>Denominación:</strong> Graphio (nombre comercial)</li>
         <li><strong>NIF/CIF:</strong> [Número de identificación fiscal]</li>
         <li><strong>Domicilio:</strong> [Dirección completa], España</li>
-        <li><strong>Email:</strong> hola@graphio.es</li>
+        <li><strong>Email:</strong> <a href="mailto:hola@graphio.es">hola@graphio.es</a></li>
         <li><strong>Teléfono:</strong> +34 600 000 000</li>
-        <li><strong>Web:</strong> https://Graphio-Imprenta.github.io/Graphio/</li>
+        <li><strong>Web:</strong> <a href="https://Graphio-Imprenta.github.io/Graphio/" target="_blank" rel="noopener noreferrer" aria-label="Web de Graphio (abre en nueva pestaña)">https://Graphio-Imprenta.github.io/Graphio/</a></li>
       </ul>
 
       <h2>2. Objeto y ámbito de aplicación</h2>
@@ -77,17 +202,33 @@
   </div>
 </main>
 
-<footer class="footer" aria-label="Pie de página">
+<footer class="footer" role="contentinfo" aria-label="Pie de página">
   <div class="container">
     <div class="footer-grid">
       <div><div class="footer-logo">Graph<span>io</span></div><p class="footer-desc">Servicios gráficos e imprenta profesional. Calidad, rapidez y atención personalizada.</p></div>
-      <nav class="footer-col" aria-label="Servicios"><h4>Servicios</h4><ul><li><a href="../servicios.html">Material corporativo</a></li><li><a href="../servicios.html">Gran formato</a></li><li><a href="../servicios.html">Packaging</a></li></ul></nav>
-      <nav class="footer-col" aria-label="Empresa"><h4>Empresa</h4><ul><li><a href="../nosotros.html">Sobre nosotros</a></li><li><a href="../blog.html">Blog</a></li><li><a href="../contacto.html">Contacto</a></li></ul></nav>
-      <nav class="footer-col" aria-label="Legal"><h4>Legal</h4><ul><li><a href="aviso-legal.html">Aviso legal</a></li><li><a href="privacidad.html">Privacidad</a></li><li><a href="cookies.html">Cookies</a></li></ul></nav>
+      <nav class="footer-col" aria-label="Servicios — pie de página">
+        <p class="footer-col-title">Servicios</p>
+        <ul role="list"><li><a href="../servicios.html">Material corporativo</a></li><li><a href="../servicios.html">Gran formato</a></li><li><a href="../servicios.html">Packaging</a></li></ul>
+      </nav>
+      <nav class="footer-col" aria-label="Empresa — pie de página">
+        <p class="footer-col-title">Empresa</p>
+        <ul role="list"><li><a href="../nosotros.html">Sobre nosotros</a></li><li><a href="../blog.html">Blog</a></li><li><a href="../contacto.html">Contacto</a></li></ul>
+      </nav>
+      <nav class="footer-col" aria-label="Legal — pie de página">
+        <p class="footer-col-title">Legal</p>
+        <ul role="list"><li><a href="aviso-legal.html">Aviso legal</a></li><li><a href="privacidad.html">Privacidad</a></li><li><a href="cookies.html">Cookies</a></li></ul>
+      </nav>
     </div>
-    <div class="footer-bottom"><p>© 2025 Graphio. Todos los derechos reservados.</p><nav class="footer-legal" aria-label="Legal"><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a><a href="cookies.html">Cookies</a></nav></div>
+    <div class="footer-bottom">
+      <p>© 2025 Graphio. Todos los derechos reservados.</p>
+      <nav class="footer-legal" aria-label="Navegación legal — pie de página">
+        <a href="aviso-legal.html">Aviso legal</a>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="cookies.html">Cookies</a>
+      </nav>
+    </div>
   </div>
 </footer>
-
+<script src="../../js/main.js"></script>
 </body>
 </html>
