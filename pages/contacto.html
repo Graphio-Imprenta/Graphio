@@ -28,7 +28,7 @@
     input:focus,select:focus,textarea:focus{border-color:var(--azul);box-shadow:0 0 0 3px rgba(58,134,255,.12)}
     textarea{resize:vertical;min-height:120px}
     .field-hint{font-size:.76rem;color:var(--gris)}
-    .field-error{font-size:.76rem;color:#E24B4A}
+    .field-error{font-size:.76rem;color:#c0392b}
     .checkbox-wrap{display:flex;align-items:flex-start;gap:10px}
     .checkbox-wrap input[type=checkbox]{width:auto;margin-top:2px;flex-shrink:0;cursor:pointer}
     .checkbox-label{font-size:.78rem;color:var(--gris);font-weight:400;line-height:1.5}
@@ -65,7 +65,7 @@
       position: absolute;
       top: -100%;
       left: 0;
-      background: var(--azul, #3A86FF);
+      background: var(--azul, #2563eb);
       color: #fff;
       padding: 12px 24px;
       font-family: var(--font-b, sans-serif);
@@ -84,7 +84,7 @@
 
     /* Focus visible global — cumple WCAG 2.4.7 */
     *:focus-visible {
-      outline: 3px solid var(--azul, #3A86FF);
+      outline: 3px solid var(--azul, #2563eb);
       outline-offset: 3px;
       border-radius: 4px;
     }
@@ -99,8 +99,8 @@
     }
 
     /* Contraste mínimo en textos secundarios — WCAG 1.4.3 */
-    /* --gris (#6C757D sobre #fff) = ratio 4.6:1 ✅ */
-    /* --gris (#6C757D sobre #F8F9FA) = ratio 4.5:1 ✅ */
+    /* --gris (#555f6e sobre #fff) = ratio 6.46:1 ✅ */
+    /* --gris (#555f6e sobre #F8F9FA) = ratio 6.13:1 ✅ */
 
     /* Tamaño mínimo de área táctil 44×44px — WCAG 2.5.5 */
     .btn, .nav-links a, .hamburger, .faq-q {
@@ -117,7 +117,7 @@
     .srv-card:focus-within,
     .blog-card:focus-within,
     .testi:focus-within {
-      outline: 2px solid var(--azul, #3A86FF);
+      outline: 2px solid var(--azul, #2563eb);
       outline-offset: 2px;
     }
 
@@ -355,6 +355,10 @@
       #chat-window { width: calc(100vw - 32px); right: 16px; bottom: 90px; }
     }
 
+  
+    /* WCAG FIX: btn-naranja — #FF6B35/white = 2.84:1 ❌ → #C94A14/white = 4.69:1 ✅ */
+    .btn-naranja { background: #C94A14 !important; color: #ffffff !important; }
+    .btn-naranja:hover { background: #b84d26 !important; box-shadow: 0 8px 24px rgba(201,74,20,0.38) !important; }
   </style>
 </head>
 <body>
@@ -494,7 +498,7 @@
             <div class="success-icon" aria-hidden="true">✅</div>
             <h3>¡Mensaje recibido!</h3>
             <p>Te respondemos en menos de 24 horas laborables. Si tienes prisa, escríbenos directamente por WhatsApp.</p>
-            <a href="https://wa.me/34600000000" class="btn btn-naranja" target="_blank" rel="noopener noreferrer">💬 Ir a WhatsApp</a>
+            <a href="https://wa.me/34600000000" class="btn btn-naranja" target="_blank" rel="noopener noreferrer" aria-label="Ir a WhatsApp (abre en nueva pestaña)"><span aria-hidden="true">💬</span> Ir a WhatsApp</a>
           </div>
         </div>
 
